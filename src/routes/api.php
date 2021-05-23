@@ -16,9 +16,12 @@ use Illuminate\Http\Request;
 
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
     //return $request->user();
+    Route::get('export/{filter}', 'BookController@export');
+    
+   
     Route::apiResource('users', 'UserController');
     Route::apiResource('books', 'BookController');
-    
+  
 
     
    

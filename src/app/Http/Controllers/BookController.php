@@ -46,4 +46,58 @@ class BookController extends Controller
 
     }
 
+    public function export($details)
+    {
+        $params = $details;
+        $headers = [
+
+            "Content-type" => "text/csv",
+            "Content-Disposition"=> "attachment; filename=books.csv",
+            "Pragma" => "no-cache",
+            "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
+            "Expires" => "0",
+
+        ];
+
+        $callback = function() use ($details) {
+
+            $books = Book::all();
+            $file = fopen('php://output', 'w');
+
+            if($details == 'authors'){
+                fputcsv($file,['Authors']);
+
+                //Body
+                foreach($books as $book){
+                    fputcsv($file,[$book->author]);
+                }
+              
+            }elseif ($details =='titles') {
+                fputcsv($file,['Title']);
+
+                //Body
+                foreach($books as $book){
+                    fputcsv($file,[$book->title]);
+                }
+            }else{
+                fputcsv($file,['ID', 'Title', 'Author', 'Description', 'Publisher', 'Genre']);
+
+                //Body
+                foreach($books as $book){
+                    fputcsv($file,[$book->id, $book->title, $book->author, $book->description, $book->publisher, $book->genre ]);
+                }
+                
+                fclose($file);
+
+            }
+
+          
+
+        };
+
+        return \Response::stream($callback, 200, $headers);
+
+
+    }
+
 }

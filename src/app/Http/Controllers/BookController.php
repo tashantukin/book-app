@@ -6,20 +6,67 @@ use App\Http\Resources\BookResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Http\Requests\BookCreateRequest;
+use App\Http\Requests\BookUpdateRequest;
 class BookController extends Controller
 {
+    /**
+     * @OA\GET(path="/books",
+     *  tags={"Books"},
+     *  @OA\Response(response="200",
+     *      description="Book Collection",
+     *     ),
+     *  @OA\Parameter(
+     *     name="page",
+     *     description="Pagination page",
+     *     in="query",
+     *     @OA\Schema(
+     *        type="integer"
+     *     )
+     *   )
+     * )
+     */
     public function index()
     {
         $books = Book::paginate();
 
         return BookResource::collection($books);
     }
+     /**
+     * @OA\GET(path="/books/{id}",
+     *  tags={"Books"},
+     *  @OA\Response(response="200",
+     *      description="Book",
+     *     ),
+     *  @OA\Parameter(
+     *     name="id",
+     *     required=true,
+     *     description="Book ID",
+     *     in="path",
+     *     @OA\Schema(
+     *        type="integer"
+     *     )
+     *   )
+     * )
+     */
 
     public function show($id)
     {
         return new BookResource(Book::find($id));
     }
 
+    /**
+     * @OA\Post(
+     *  path="/books/",
+     *  tags={"Books"},
+     *  @OA\Response(response="201",
+     *      description="Book create",
+     *     ),
+     *     @OA\RequestBody(
+     *       required=true,
+     *      @OA\JsonContent(ref="#/components/schemas/BookCreateRequest")      
+     *  )
+     * )
+     */
     public function store(BookCreateRequest $request)
     {
       
@@ -28,7 +75,30 @@ class BookController extends Controller
         return response($book, 201);
     }
 
-    public function update(Request $request, $id)
+    /**
+     * @OA\Put(
+     *  path="/books/{id}",
+     *  tags={"Books"},
+     *  @OA\Response(response="202",
+     *      description="Book update",
+     *     ),
+     *  @OA\Parameter(
+     *     name="id",
+     *     description="User ID",
+     *     in="path",
+     *     @OA\Schema(
+     *        type="integer"
+     *     )
+     *   ),
+     *     @OA\RequestBody(
+     *       required=true,
+     *      @OA\JsonContent(ref="#/components/schemas/BookUpdateRequest")      
+     *  )
+     * )
+     */
+
+
+    public function update(BookUpdateRequest $request, $id)
     {
         $book = Book::find($id);
 
@@ -37,6 +107,23 @@ class BookController extends Controller
         return response($book, 201);
 
     }
+    /**
+     * @OA\Delete(path="/books/{id}",
+     *  tags={"Books"},
+     *  @OA\Response(response="204",
+     *      description="Delete book",
+     *     ),
+     *  @OA\Parameter(
+     *     name="id",
+     *     required=true,
+     *     description="Book ID",
+     *     in="path",
+     *     @OA\Schema(
+     *        type="integer"
+     *     )
+     *   )
+     * )
+     */
 
     public function destroy($id)
     {
@@ -45,6 +132,23 @@ class BookController extends Controller
         return response(null,  204);
 
     }
+    /**
+     * @OA\GET(path="/books/export/{filter}",
+     *  tags={"File Export"},
+     *  @OA\Response(response="200",
+     *      description="Export book data to CSV/XML format.",
+     *     ),
+     *  @OA\Parameter(
+     *     name="/all || /titles || /authors",
+     *     required=true,
+     *     description="To export book details",
+     *     in="path",
+     *     @OA\Schema(
+     *        type="string"
+     *     )
+     *   )
+     * )
+     */
 
     public function export($details)
     {
@@ -99,5 +203,6 @@ class BookController extends Controller
 
 
     }
+ 
 
 }

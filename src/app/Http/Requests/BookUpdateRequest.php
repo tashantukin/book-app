@@ -5,15 +5,14 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 /**
  * @OA\Schema(
- *      title="Store Book request",
- *      description="Store book request body data",
+ *      title="Update Book request",
+ *      description="Update book request body data",
  * )
  */
 
-
-class BookCreateRequest extends FormRequest
+class BookUpdateRequest extends FormRequest
 {
-    /**
+     /**
      * @OA\Property(
      *     title="title"
      * )

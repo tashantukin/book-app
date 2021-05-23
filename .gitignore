@@ -4,4 +4,4 @@ docker-compose.override.yml
 .cloneignore
 Jenkinsfile*
 /clone*
-src/vendor
+/src/vendor

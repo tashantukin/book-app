@@ -25,7 +25,7 @@ class Books extends Component {
     
   }
 
-
+//for pagination
   previous = async () => {
       if(this.page === 1) return;
 
@@ -43,6 +43,17 @@ class Books extends Component {
 
     await this.componentDidMount();
 
+  }
+
+
+  delete = async (id:number) => {
+    if(window.confirm('Are you sure you want to delete this book?')) {
+        await axios.delete(`books/${id}`);
+
+        this.setState({
+          books: this.state.books.filter((b: Book) => b.id !== id)
+        })
+      } 
   }
 
   render() {
@@ -91,7 +102,8 @@ class Books extends Component {
                 <td>  
                 <div className="btn-group-mr2">
                   <a href="#" className="btn btn-sm btn-outline-secondary">Edit </a>
-                  <a href="#" className="btn btn-sm btn-outline-secondary">Delete </a>
+                  <a href="#" className="btn btn-sm btn-outline-secondary" 
+                  onClick={() =>this.delete(book.id)}>Delete </a>
 
                 </div>
                  </td>

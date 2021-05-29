@@ -8,11 +8,13 @@ import {Link} from 'react-router-dom'
 class Books extends Component {
 
   state = {
-    books : []
+    books : [],
+    
   }
 
   page = 1;
   last_page = 0;
+  selectedExport = 'all';
 
   componentDidMount = async () => {
     const response = await axios.get(`books?page=${this.page}`)
@@ -56,6 +58,18 @@ class Books extends Component {
       } 
   }
 
+//csv export
+  handleExport = async () => {
+    const response = await axios.get(`export/${this.selectedExport}`, {responseType: 'blob'});
+    const blob = new Blob([response.data], {type: 'text/csv'});
+    const download_url = window.URL.createObjectURL(response.data);
+    const link = document.createElement('a');
+    link.href = download_url;
+    link.download = `book_${this.selectedExport}.csv`;
+    link.click();
+
+  }
+
   render() {
     return (
       <Wrapper>
@@ -63,11 +77,17 @@ class Books extends Component {
        <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 className="h2">Dashboard</h1>
         <div className="btn-toolbar mb-2 mb-md-0">
-            <div className="btn-group me-2">
-                <button type="button" className="btn btn-sm btn-outline-secondary">Export</button>
+           <div className="btn-toolbar mb-2 mb-md-0">
+               <select className="form-select" aria-label="Default select example" id="export-type" onChange={e => this.selectedExport = e.target.value}>
+                <option selected>Select export type</option>
+                <option value="all">All books</option>
+                <option value="authors">All Authors</option>
+                <option value="titles">All Titles</option>
+              </select>
              </div>
-          
-          
+              
+                <button onClick={this.handleExport} className="btn btn-sm btn-outline-secondary">Export</button>
+             
          </div>
 
        
@@ -137,12 +157,7 @@ class Books extends Component {
 
     </nav>
 
-
-
-
-
-
-        </Wrapper>
+    </Wrapper>
       
 
     )

@@ -13,5 +13,6 @@ $factory->define(Book::class, function (Faker $faker) {
         'publisher' => $faker->text,
         'genre' => $faker->text,
         'image' => $faker->imageUrl()
+       
     ];
 });

@@ -101,8 +101,8 @@ class Books extends Component {
                 <td>{book.author}</td>
                 <td>  
                 <div className="btn-group-mr2">
-                  <a href="#" className="btn btn-sm btn-outline-secondary">Edit </a>
-                  <a href="#" className="btn btn-sm btn-outline-secondary" 
+                  <Link key={book.id} to={`/books/${book.id}/edit`} className="btn btn-sm btn-outline-secondary">Edit </Link>
+                  <a className="btn btn-sm btn-outline-secondary" 
                   onClick={() =>this.delete(book.id)}>Delete </a>
 
                 </div>

@@ -20,7 +20,7 @@ function App() {
             <Route path={'/dashboard'} exact component = {Dashboard} />
             <Route path={'/books'}component = {Books} exact />
             <Route path={'/books/create'}component = {BookCreate} exact />
-            <Route path={'/books/update'} component = {BookEdit}/>
+            <Route path={'/books/:id/edit'} component = {BookEdit} exact />
             <Route path={'/login'}component = {Login} />
             <Route path={'/register'}component = {Register} />
         </BrowserRouter>

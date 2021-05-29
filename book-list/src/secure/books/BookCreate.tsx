@@ -45,7 +45,7 @@ import axios from 'axios'
                     </div>
 
                     <div className="form-group">
-                        <button className="w-100 btn btn-lg btn-primary" type="submit">Save</button>
+                        <button className="w-100 btn btn-lg btn-primary" type="submit" >Save</button>
                     </div>
                 
                 </form>

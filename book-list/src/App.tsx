@@ -5,6 +5,8 @@ import Nav from './secure/components/Nav';
 import Menu from './secure/components/Menu';
 import Dashboard from './secure/dashboard/Dashboard';
 import Books from './secure/books/Books';
+import BookCreate from './secure/books/BookCreate';
+import BookEdit from './secure/books/BookEdit';
 import {BrowserRouter, Route} from 'react-router-dom';
 import Login from './public/Login';
 import Register from './public/Register';
@@ -16,7 +18,9 @@ function App() {
         <BrowserRouter>
             <Route path={'/'} exact component = {DashboardRedirect} />
             <Route path={'/dashboard'} exact component = {Dashboard} />
-            <Route path={'/books'}component = {Books} />
+            <Route path={'/books'}component = {Books} exact />
+            <Route path={'/books/create'}component = {BookCreate} exact />
+            <Route path={'/books/update'} component = {BookEdit}/>
             <Route path={'/login'}component = {Login} />
             <Route path={'/register'}component = {Register} />
         </BrowserRouter>

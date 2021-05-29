@@ -75,7 +75,7 @@ class Books extends Component {
 
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 mb-3 ">
          <div className="btn-toolbar mb-2 mb-md-0">
-            <Link to={'/users/create'} className= "btn btn-sm btn-outline-secondary">Add new book</Link>
+            <Link to={'/books/create'} className= "btn btn-sm btn-outline-secondary">Add new book</Link>
          </div>
       </div>
 

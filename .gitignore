@@ -5,3 +5,4 @@ docker-compose.override.yml
 Jenkinsfile*
 /clone*
 /src/vendor
+/book-list/node_modules

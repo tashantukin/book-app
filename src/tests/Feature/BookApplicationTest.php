@@ -80,4 +80,32 @@ class BookApplicationTest extends TestCase
     }
 
 
+    
+       /** @test */
+
+       public function a_book_can_be_deleted() 
+  
+       {
+           $this->withoutExceptionHandling();
+   
+           $response = $this->post('/api/books', [
+               'title' =>'Random Book',
+               'author' => 'Shotegai'
+           ]);
+   
+           $book = Book::first();
+           $this->assertCount(1, Book::all());
+   
+           $response = $this->delete('/api/books/' . $book->id,[
+               'title' =>'new Book',
+               'author' => 'Shoro'
+           ]);
+   
+        
+           $this->assertCount(0, Book::all());
+
+       }
+   
+
+
 }

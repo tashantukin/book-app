@@ -27,7 +27,7 @@ class Books extends Component {
     
   }
 
-//for pagination
+//pagination
   previous = async () => {
       if(this.page === 1) return;
 

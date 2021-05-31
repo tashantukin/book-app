@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, SyntheticEvent} from 'react'
 import Wrapper from '../Wrapper'
 import axios from 'axios'
 import {Book} from '../../classes/book'
@@ -15,6 +15,7 @@ class Books extends Component {
   page = 1;
   last_page = 0;
   selectedExport = 'all';
+  searchKey = '';
 
   componentDidMount = async () => {
     const response = await axios.get(`books?page=${this.page}`)
@@ -27,6 +28,19 @@ class Books extends Component {
     
   }
 
+  handleSearch = async (key:string) => {
+    if(key !== '') {
+        this.setState({
+            books: this.state.books.filter((b: Book) => b.title.toLowerCase().includes(key.toLowerCase()) || b.author.toLowerCase().includes(key.toLowerCase()) )
+          })
+    } 
+    else {
+        await this.componentDidMount();
+    }
+
+  }
+
+  
 //pagination
   previous = async () => {
       if(this.page === 1) return;
@@ -93,12 +107,14 @@ class Books extends Component {
        
     </div>
 
+   
+
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 mb-3 ">
          <div className="btn-toolbar mb-2 mb-md-0">
             <Link to={'/books/create'} className= "btn btn-sm btn-outline-secondary">Add new book</Link>
-         </div>
+         </div>  
       </div>
-
+      <input type ="text" placeholder="Search..." onChange={e => this.handleSearch(e.target.value)}  />
         <div className="table-responsive">
         <table className="table table-striped table-sm">
             <thead>

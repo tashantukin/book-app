@@ -16,6 +16,8 @@ class Books extends Component {
   last_page = 0;
   selectedExport = 'all';
   searchKey = '';
+  sortDirection = 'desc';
+ 
 
   componentDidMount = async () => {
     const response = await axios.get(`books?page=${this.page}`)
@@ -40,7 +42,22 @@ class Books extends Component {
 
   }
 
-  
+
+  handleSort = async (column:string) => {
+    if (this.sortDirection === 'desc') {
+      this.sortDirection = 'asc'
+      this.setState({ books: this.state.books.sort((a,b) => a[column] > b[column] ? 1 : -1)
+
+      })
+    }else {
+      this.sortDirection =  'desc'
+      this.setState({ books: this.state.books.sort((a,b) => a[column] < b[column] ? 1 : -1)
+
+      })
+    }
+         
+  }
+
 //pagination
   previous = async () => {
       if(this.page === 1) return;
@@ -120,8 +137,8 @@ class Books extends Component {
             <thead>
             <tr>
                 <th>#</th>
-                <th>Title</th>
-                <th>Author</th>
+                <th style={{cursor: "pointer"}} onClick={()=>this.handleSort('title')}>Title </th>
+                <th style= {{cursor: "pointer"}} onClick={()=>this.handleSort('author')}>Author</th>
                 <th>Action</th>
                
             </tr>

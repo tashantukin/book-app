@@ -106,7 +106,7 @@ class Books extends Component {
       <Wrapper>
 
        <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 className="h2">Dashboard</h1>
+        <h1 className="h2">Book List</h1>
         <div className="btn-toolbar mb-2 mb-md-0">
            <div className="btn-toolbar mb-2 mb-md-0">
                <select className="form-select" aria-label="Default select example" id="export-type" onChange={e => this.selectedExport = e.target.value}>
@@ -125,7 +125,6 @@ class Books extends Component {
     </div>
 
    
-
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 mb-3 ">
          <div className="btn-toolbar mb-2 mb-md-0">
             <Link to={'/books/create'} className= "btn btn-sm btn-outline-secondary">Add new book</Link>

@@ -28,7 +28,7 @@
 # Installation
 1. Clone the repository.
 2. Start the containers by running `docker-compose up -d` in the project root.
-3. Three (3) containers should be created one for backend(laravel), front end(react app) and the db (mysql).
+3. Three (3) images should be created one for backend(laravel), front end(react app) and the db (mysql).
 4. Database migration
  ```
       Run `docker exec -it assignment01-laravel sh` in the project root to be able to run commands in laravel container.

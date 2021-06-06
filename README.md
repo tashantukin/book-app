@@ -17,7 +17,8 @@
   - [Search book / author](#search)
   - [Sorting by title/author](#sorting)
   - [CSV export](#file-export)
-  - [API Documentation](#api-documentation)
+- [API Documentation](#api-documentation)
+- [Unit Tests (PHPUnit)](#unit-tests) 
 
 # Requirements
 [(Back to top)](#table-of-contents)
@@ -98,7 +99,17 @@
 
   ![api_doc](https://user-images.githubusercontent.com/32629251/120916997-6934b280-c6df-11eb-963d-fb647b46ab45.PNG)
   
- 
+# Unit Tests 
+[(Back to top)](#table-of-contents)
+
+- Relevant test cases were created to test the API functionalities. 
+- Access the test suite results by running `vendor/bin/phpunit` inside the laravel container.
+# The following are the list of test cases created:
+- A book can be added
+- Title is required
+- Author is required
+- A book can be updated
+- A book can be deleted
 
 
 

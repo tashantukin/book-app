@@ -1,7 +1,9 @@
 # Book Application
 	A simple application which enables the user to perform CRUD operations and export book details in csv format. 
 	This project was built in dockerize Laravel, React and Mysql as the database.
-# Demo-Preview
+# Preview
+![preview_1](https://user-images.githubusercontent.com/32629251/120915031-173a5f80-c6d4-11eb-9a9a-91451260621e.JPG)
+
 
 
 # Table of contents

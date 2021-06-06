@@ -1,31 +1,32 @@
+# Book Application
+	A simple application which enables the user to perform CRUD operations and export book details in csv format. 
+	This project was built in dockerize Laravel, React and Mysql as the database.
+# Demo-Preview
+
+
+# Table of contents
+- [Book Application](#book-application)
+- [Demo-Preview](#demo-preview)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+
+
 ## Requirements
 - [Docker](https://docs.docker.com/install)
 - [Docker Compose](https://docs.docker.com/compose/install)
 
-## Setup
+## Installation
 1. Clone the repository.
-1. Start the containers by running `docker-compose up -d` in the project root.
-1. Install the composer packages by running `docker-compose exec laravel composer install`.
-1. Access the Laravel instance on `http://localhost` (If there is a "Permission denied" error, run `docker-compose exec laravel chown -R www-data storage`).
+2. Start the containers by running `docker-compose up -d` in the project root.
+3. Three (3) containers should be created one for backend(laravel), front end(react app) and the db (mysql).
+4. Database migration
+ ```
+      Run `docker exec -it assignment01-laravel sh` in the project root.
+      Perform migration with  `php artisan migrate`
+      Once migration is done, seed the db by running `php artisan db:seed --class=BookSeeder`
+  ```
+3. Access the book application on localhost:3000
 
-Note that the changes you make to local files will be automatically reflected in the container. 
+# Usage
 
-## Persistent database
-If you want to make sure that the data in the database persists even if the database container is deleted, add a file named `docker-compose.override.yml` in the project root with the following contents.
-```
-version: "3.7"
-
-services:
-  mysql:
-    volumes:
-    - mysql:/var/lib/mysql
-
-volumes:
-  mysql:
-```
-Then run the following.
-```
-docker-compose stop \
-  && docker-compose rm -f mysql \
-  && docker-compose up -d
-``` 
